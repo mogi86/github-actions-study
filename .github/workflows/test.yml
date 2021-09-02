@@ -5,20 +5,20 @@ on: push
 jobs:
   test:
 
+    # 最初からPHPとComposerが入ってるみたい
     runs-on: ubuntu-latest
 
     steps:
-      - name: PHPのバージョン確認
+      - name: 1.PHPのバージョン確認
         run: php -v
-      - name: Compoerのバージョン確認
+
+      - name: 2.Compoerのバージョン確認
         run: composer -V
 
-#      - uses: actions/checkout@v2
+      - name: 3.chekcout
+        uses: actions/checkout@v2
 
-#      - name: Validate composer.json and composer.lock
-#        run: composer validate --strict
-
-      - name: Cache Composer packages
+      - name: 4.composerでインストールしたものをキャッシュする
         id: composer-cache
         uses: actions/cache@v2
         with:
@@ -27,11 +27,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-php-
 
-      - name: Install dependencies
+      - name: 5.composer install
         run: composer install
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
-
-      - name: Run test suite
-        run: ./vendor/bin/phpunit .
+      - name: 6.ユニットテストの実行
+        run: ./vendor/bin/phpunit ./tests
