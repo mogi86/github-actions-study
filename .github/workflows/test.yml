@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: test
-        run: which php
-      - name: test2
-        run: which composer
+      - name: PHPのバージョン確認
+        run: php -v
+      - name: Compoerのバージョン確認
+        run: composer -V
 
 #      - uses: actions/checkout@v2
 #
