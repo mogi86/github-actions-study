@@ -1,0 +1,17 @@
+name: Project Card動かされたら実行
+
+on:
+  project_card:
+    types: [moved]
+
+jobs:
+  check-card:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: chekcout
+        uses: actions/checkout@v2
+
+      - name: 動かされたカード情報
+        run: echo "カードid ${{ github.event.project_card.id }} が移動されました"
